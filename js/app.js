@@ -2,7 +2,7 @@
  * Create a list that holds all of your cards
  */
 
-
+// Can I deckOfCards.nodeList.item() to turn the nodeList items from deckOfCards into an array?
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -36,3 +36,20 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+// https://www.w3schools.com/howto/howto_js_toggle_class.asp
+
+/*
+function flipCard() {
+    this.cards.classList.toggle('.open');
+    this.cards.classList.toggle('.show');
+}
+*/
+
+const deckOfCards = document.querySelector('.deck');
+
+deckOfCards.addEventListener('click', function(event) {
+    if(event.target.nodeName === 'LI') {
+//        flipCard();
+        console.log('Gotcha!');
+    }
+});
