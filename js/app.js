@@ -46,10 +46,16 @@ function flipCard() {
 */
 
 const deckOfCards = document.querySelector('.deck');
+let card = document.querySelectorAll('.card');
+console.log(card);
 
 deckOfCards.addEventListener('click', function(event) {
+    let evtTarget = event.target;
     if(event.target.nodeName === 'LI') {
-//        flipCard();
-        console.log('Gotcha!');
+        function flipCard() {
+            evtTarget.classList.toggle(open);
+            evtTarget.classList.toggle(show);
+        };
+    console.log('Gotcha!');
     }
 });
