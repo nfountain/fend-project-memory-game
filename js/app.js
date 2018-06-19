@@ -51,11 +51,13 @@ console.log(card);
 
 deckOfCards.addEventListener('click', function(event) {
     let evtTarget = event.target;
-    if(event.target.nodeName === 'LI') {
-        function flipCard() {
-            evtTarget.classList.toggle(open);
-            evtTarget.classList.toggle(show);
-        };
+    if(evtTarget.nodeName === 'LI') {
+        flipCard(evtTarget);
     console.log('Gotcha!');
     }
 });
+
+function flipCard(evtTarget) {
+    evtTarget.classList.toggle('open');
+    evtTarget.classList.toggle('show');
+};
