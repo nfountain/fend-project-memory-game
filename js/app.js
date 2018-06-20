@@ -61,3 +61,13 @@ function flipCard(evtTarget) {
     evtTarget.classList.toggle('open');
     evtTarget.classList.toggle('show');
 };
+
+// create array to hold the flipped cards, courtesy of Matt Cranford's blog, accessed 06/19/18 at <https://matthewcranford.com/memory-game-walkthrough-part-3-matching-pairs/>
+let flippedCards = [];
+
+function matchCard() {
+    flippedCards.push(evtTarget);
+/*    if(flippedCards.length === 2) {
+        checkForMatch
+    } */
+};
