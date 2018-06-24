@@ -5,8 +5,8 @@ const deckOfCards = document.querySelector('.deck');
 // Cards, list of all cards, list of opened cards
 let card = document.querySelectorAll('.card');
 let cardsThatMatch = document.querySelectorAll('.match');
-let listAllCards = [...card];
-console.log(listAllCards);
+let listOfCards = [...card];
+console.log(listOfCards);
 let flippedCards = []; // create array to hold the flipped cards, courtesy of Matt Cranford's blog, accessed 06/19/18 at <https://matthewcranford.com/memory-game-walkthrough-part-3-matching-pairs/>
 
 // Stars
@@ -16,28 +16,6 @@ let stars = document.querySelectorAll('.fa-star');
 
 // resetButton
 let resetButton = document.getElementById('reset-game');
-
-// Event listener for resetButton
-resetButton.addEventListener('click', function(event) {
-    backsOfCards(); //doesn't work why?
-    shuffle(listAllCards);
-});
-
-function backsOfCards() {
-    for(let card of cards()) {
-        this.classList.remove('match');
-        this.classList.remove('open');
-        this.classList.remove('show');
-    }
-};
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -54,24 +32,55 @@ function shuffle(array) {
     return array;
 }
 
-/* Shuffle function from https://www.youtube.com/watch?v=tLxBwSL3lPQ by Adam Khoury, accessed 06/24/18.
-let cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
-console.log('Cards to shuffle: ' + cardsToShuffle);
-
-function shuffle() {
-    let i = this.length, j ,temporaryValue;
-    while(--i > 0) {
-        j = Math.floor(Math.random() * (i + 1));
-        temporaryValue = this[j];
-        this[j] = this[i];
-        this[i] = temporaryValue;
+function resetCards() {
+    listOfCards = shuffle(listOfCards);
+    for(let i = 0; i < listOfCards.length; i++) {
+        deckOfCards.innerHTML = "";
+        // using array symbols to call the forEach method courtesy of sandraisreal accessed 06/24/18
+        [].forEach.call(listOfCards, function(newCard) {
+            deckOfCards.appendChild(newCard);
+        });
+        listOfCards[i].classList.remove('match', 'open', 'show');
     }
-    return this;
 };
-*/
 
-// Shuffle the list of cards
-shuffle(listAllCards);
+// Event listener for resetButton
+resetButton.addEventListener('click', function(event) {
+    resetCards(); // Doesn't work why?
+    //resetMoves();
+    //resetTimer();
+});
+
+// Interacting with cards (click to flip, add to array of clicked cards, check for match, and classList.toggle('match') if matches, otherwise, classList.remove('open') and classList.remove('show))
+function flipCard(evtTarget) {
+    evtTarget.classList.toggle('open');
+    evtTarget.classList.toggle('show');
+};
+
+function matchCard() {
+    flippedCards.push(evtTarget);
+/*    if(flippedCards.length === 2) {
+        checkForMatch
+    } */
+};
+
+
+
+deckOfCards.addEventListener('click', function(event) {
+    let evtTarget = event.target;
+    if(evtTarget.nodeName === 'LI') {
+        flipCard(evtTarget);
+    console.log('Gotcha!');
+    }
+});
+
+
+/*
+ * Display the cards on the page
+ *   - shuffle the list of cards using the provided "shuffle" method below
+ *   - loop through each card and create its HTML
+ *   - add each card's HTML to the page
+ */
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -85,23 +94,3 @@ shuffle(listAllCards);
  */
 // https://www.w3schools.com/howto/howto_js_toggle_class.asp
 
-deckOfCards.addEventListener('click', function(event) {
-    let evtTarget = event.target;
-    if(evtTarget.nodeName === 'LI') {
-        flipCard(evtTarget);
-    console.log('Gotcha!');
-    }
-});
-
-function flipCard(evtTarget) {
-    evtTarget.classList.toggle('open');
-    evtTarget.classList.toggle('show');
-};
-
-
-function matchCard() {
-    flippedCards.push(evtTarget);
-/*    if(flippedCards.length === 2) {
-        checkForMatch
-    } */
-};
