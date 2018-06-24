@@ -1,3 +1,9 @@
+// Declare variables
+const deckOfCards = document.querySelector('.deck');
+let card = document.querySelectorAll('.card');
+
+const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
+console.log('Cards to shuffle: ' + cardsToShuffle);
 /*
  * Create a list that holds all of your cards
  */
@@ -44,10 +50,6 @@ function flipCard() {
     this.cards.classList.toggle('.show');
 }
 */
-
-const deckOfCards = document.querySelector('.deck');
-let card = document.querySelectorAll('.card');
-console.log(card);
 
 deckOfCards.addEventListener('click', function(event) {
     let evtTarget = event.target;
