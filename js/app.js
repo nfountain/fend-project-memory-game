@@ -2,13 +2,10 @@
 const deckOfCards = document.querySelector('.deck');
 let card = document.querySelectorAll('.card');
 
-const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
-console.log('Cards to shuffle: ' + cardsToShuffle);
-/*
- * Create a list that holds all of your cards
- */
+// Create a list that holds all of your cards
+let cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
+console.log(cardsToShuffle);
 
-// Can I deckOfCards.nodeList.item() to turn the nodeList items from deckOfCards into an array?
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -31,6 +28,24 @@ function shuffle(array) {
     return array;
 }
 
+/* Shuffle function from https://www.youtube.com/watch?v=tLxBwSL3lPQ by Adam Khoury, accessed 06/24/18.
+let cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
+console.log('Cards to shuffle: ' + cardsToShuffle);
+
+function shuffle() {
+    let i = this.length, j ,temporaryValue;
+    while(--i > 0) {
+        j = Math.floor(Math.random() * (i + 1));
+        temporaryValue = this[j];
+        this[j] = this[i];
+        this[i] = temporaryValue;
+    }
+    return this;
+};
+*/
+
+// Shuffle the list of cards
+shuffle(cardsToShuffle);
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -43,13 +58,6 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 // https://www.w3schools.com/howto/howto_js_toggle_class.asp
-
-/*
-function flipCard() {
-    this.cards.classList.toggle('.open');
-    this.cards.classList.toggle('.show');
-}
-*/
 
 deckOfCards.addEventListener('click', function(event) {
     let evtTarget = event.target;
