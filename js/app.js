@@ -1,10 +1,36 @@
 // Declare variables
+// Deck (for EventListener)
 const deckOfCards = document.querySelector('.deck');
-let card = document.querySelectorAll('.card');
 
-// Create a list that holds all of your cards
-let cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
-console.log(cardsToShuffle);
+// Cards, list of all cards, list of opened cards
+let card = document.querySelectorAll('.card');
+let cardsThatMatch = document.querySelectorAll('.match');
+let listAllCards = [...card];
+console.log(listAllCards);
+let flippedCards = []; // create array to hold the flipped cards, courtesy of Matt Cranford's blog, accessed 06/19/18 at <https://matthewcranford.com/memory-game-walkthrough-part-3-matching-pairs/>
+
+// Stars
+let stars = document.querySelectorAll('.fa-star');
+
+// Moves
+
+// resetButton
+let resetButton = document.getElementById('reset-game');
+
+// Event listener for resetButton
+resetButton.addEventListener('click', function(event) {
+    backsOfCards(); //doesn't work why?
+    shuffle(listAllCards);
+});
+
+function backsOfCards() {
+    for(let card of cards()) {
+        this.classList.remove('match');
+        this.classList.remove('open');
+        this.classList.remove('show');
+    }
+};
+
 
 /*
  * Display the cards on the page
@@ -45,7 +71,7 @@ function shuffle() {
 */
 
 // Shuffle the list of cards
-shuffle(cardsToShuffle);
+shuffle(listAllCards);
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -72,8 +98,6 @@ function flipCard(evtTarget) {
     evtTarget.classList.toggle('show');
 };
 
-// create array to hold the flipped cards, courtesy of Matt Cranford's blog, accessed 06/19/18 at <https://matthewcranford.com/memory-game-walkthrough-part-3-matching-pairs/>
-let flippedCards = [];
 
 function matchCard() {
     flippedCards.push(evtTarget);
