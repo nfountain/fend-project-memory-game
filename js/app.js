@@ -65,7 +65,7 @@ document.addEventListener('load', resetCards());
 
 // Event listener for resetButton
 resetButton.addEventListener('click', function(event) {
-    resetCards(); // Doesn't work why?
+    resetCards();
     //resetMoves();
     //resetTimer();
 });
@@ -77,19 +77,22 @@ function flipCard(evtTarget) {
 };
 
 function matchCard() {
-    flippedCards.push(evtTarget);
-/*    if(flippedCards.length === 2) {
+    if(flippedCards.length === 2) {
         checkForMatch
-    } */
+    }
 };
-
 
 
 deckOfCards.addEventListener('click', function(event) {
     let evtTarget = event.target;
     if(evtTarget.nodeName === 'LI') {
         flipCard(evtTarget);
-    console.log('Gotcha!');
+        flippedCards.push(evtTarget);
+        console.log('Gotcha!');
+        console.log(flippedCards);
+//        if(flippedCards.length === 2) {
+//            matchCard(flippedCards);
+//        }
     }
 });
 
