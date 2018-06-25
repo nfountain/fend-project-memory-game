@@ -76,12 +76,18 @@ function flipCard(evtTarget) {
     evtTarget.classList.toggle('show');
 };
 
-function matchCard() {
+// firstElementChild.classList did not work, so used Matt Cranford's approach of firstElementChild.className
+function checkForMatch() {
     if(flippedCards.length === 2) {
-        checkForMatch
+        setTimeout(function() {
+            if(flippedCards[0].firstElementChild.className === flippedCards[1].firstElementChild.className) {
+                flippedCards[0].classList.toggle('match');
+                flippedCards[1].classList.toggle('match');
+                console.log('they match!');
+            }
+        }, 3000);
     }
 };
-
 
 deckOfCards.addEventListener('click', function(event) {
     let evtTarget = event.target;
@@ -90,9 +96,10 @@ deckOfCards.addEventListener('click', function(event) {
         flippedCards.push(evtTarget);
         console.log('Gotcha!');
         console.log(flippedCards);
-//        if(flippedCards.length === 2) {
-//            matchCard(flippedCards);
-//        }
+        if(flippedCards.length === 2) {
+            console.log('2 cards!');
+            checkForMatch(flippedCards);// goes here once that function works
+        }
     }
 });
 
