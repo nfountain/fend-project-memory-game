@@ -84,6 +84,12 @@ function checkForMatch() {
                 flippedCards[0].classList.toggle('match');
                 flippedCards[1].classList.toggle('match');
                 console.log('they match!');
+            } else {
+                flippedCards[0].classList.toggle('open');
+                flippedCards[0].classList.toggle('show');
+                flippedCards[1].classList.toggle('open');
+                flippedCards[1].classList.toggle('show');
+                console.log('no match!');
             }
         }, 3000);
     }
