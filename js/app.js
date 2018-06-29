@@ -62,18 +62,21 @@ function resetTimer() {
 
 */
 
+function resetMoves() {
+    let moves = 0;
+    moveCount.innerHTML = moves;
+};
+
+function resetAll() {
+    resetCards();
+    resetMoves();
+}
 // Event listener for page load that shuffles cards with each load (which includes reloads). Syntax from W3Schools on 06/24/18 <https://www.w3schools.com/jsref/event_onload.asp>
-document.addEventListener('load', resetCards());
+document.addEventListener('load', resetAll());
 // Hoping I can call multiple functions in this event listener. Maybe an arrow function with each function on its own line? If not, I'll need to string all of the reset functions into one reset function with multiple [anonymous?] functions, and call that here with the page load and reset button.
 
 // Event listener for resetButton
-resetButton.addEventListener('click', function(event) {
-    resetCards();
-    //resetStars();
-    //resetMoves();
-    //resetTimer();
-});
-
+resetButton.addEventListener('click', resetAll());
 
 // Interacting with cards
 
