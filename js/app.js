@@ -13,6 +13,8 @@ let flippedCards = []; // create array to hold the flipped cards, courtesy of Ma
 let stars = document.querySelectorAll('.fa-star');
 
 // Moves (Counter)
+const moveCount = document.querySelector('.moves');
+let moves = 0;
 
 // resetButton
 let resetButton = document.getElementById('reset-game');
@@ -44,12 +46,13 @@ function resetCards() {
     }
 };
 
-/*
-function resetStars() {
-
+function addMove() {
+    moves ++;
+    moveCount.innerHTML = moves;
 };
 
-function resetMoves() {
+/*
+function resetStars() {
 
 };
 
@@ -66,17 +69,22 @@ document.addEventListener('load', resetCards());
 // Event listener for resetButton
 resetButton.addEventListener('click', function(event) {
     resetCards();
+    //resetStars();
     //resetMoves();
     //resetTimer();
 });
 
-// Interacting with cards (click to flip, add to array of clicked cards, check for match, and classList.toggle('match') if matches, otherwise, classList.remove('open') and classList.remove('show))
+
+// Interacting with cards
+
+// Resources: https://www.w3schools.com/howto/howto_js_toggle_class.asp
 function flipCard(evtTarget) {
     evtTarget.classList.toggle('open');
     evtTarget.classList.toggle('show');
 };
 
-// firstElementChild.classList did not work, so used Matt Cranford's approach of firstElementChild.className
+// Resources: firstElementChild.classList did not work, so used Matt Cranford's approach of firstElementChild.className
+// TODO: Fix bug that allows cards with the 'match' class to be added to the array.
 function checkForMatch() {
     if(flippedCards.length === 2) {
         setTimeout(function() {
@@ -84,6 +92,8 @@ function checkForMatch() {
                 flippedCards[0].classList.toggle('match');
                 flippedCards[1].classList.toggle('match');
                 console.log('they match!');
+                addMove();
+                //increment move counter
                 flippedCards.splice(0, 2);
             } else {
                 flippedCards[0].classList.toggle('open');
@@ -91,6 +101,8 @@ function checkForMatch() {
                 flippedCards[1].classList.toggle('open');
                 flippedCards[1].classList.toggle('show');
                 console.log('no match!');
+                addMove();
+                //increment move counter
                 flippedCards.splice(0, 2);
             }
         }, 3000);
@@ -106,14 +118,14 @@ deckOfCards.addEventListener('click', function(event) {
         console.log(flippedCards);
         if(flippedCards.length === 2) {
             console.log('2 cards!');
-            checkForMatch(flippedCards);// goes here once that function works
+            checkForMatch(flippedCards);
         }
     }
 });
 
 
-/*
- * Display the cards on the page
+/* DONE
+ * Display the cards on the page 
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
@@ -121,13 +133,15 @@ deckOfCards.addEventListener('click', function(event) {
 
 /*
  * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+ * DONE - display the card's symbol (put this functionality in another function that you call from this one)
+ * MOVE THE CLASS CHANGE TO ANOTHER FUNCTION - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+ * DONE - if the list already has another card, check to see if the two cards match
+ * MOVE THE CLASS CHANGE TO ANOTHER FUNCTION     + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+ * MOVE THE CLASS CHANGE TO ANOTHER FUNCTION     + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+ *      + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+ *      + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-// https://www.w3schools.com/howto/howto_js_toggle_class.asp
 
+// Pop up message resources:
+// https://www.w3schools.com/js/js_popup.asp
+// https://www.w3schools.com/howto/howto_css_modals.asp
