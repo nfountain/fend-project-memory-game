@@ -74,6 +74,11 @@ function startTime() {
     }, 1000);
 };
 
+// Stop timer
+function stopTime() {
+    clearInterval(startTime);
+};
+
 /*
 function resetStars() {
 
@@ -112,8 +117,7 @@ function popUp() {
 function winGame() {
     popUp();
     returnStats();
-    //returnTime();
-    //stopTime();
+    stopTime();
 };
 */
 
