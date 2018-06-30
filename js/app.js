@@ -51,6 +51,22 @@ function addMove() {
     moveCount.innerHTML = moves;
 };
 
+function startTime() {
+    let seconds = 0;
+    let minutes = 0;
+    setInterval(function() {
+        seconds ++; 
+//        if(seconds < 10) {
+//            return `0${seconds}`;
+//            } else if(seconds > 59) {
+//                minutes++;
+//            } else if(minutes > 10) {
+//                return `0${minutes}`;
+//            } else return `${minutes}:${seconds}`;
+    console.log(seconds);
+    }, 1000);
+};
+
 /*
 function resetStars() {
 
@@ -70,6 +86,9 @@ function resetMoves() {
 function resetAll() {
     resetCards();
     resetMoves();
+    //startTime();
+    //resetStars();
+    //resetTimer();
 }
 // Event listener for page load that shuffles cards with each load (which includes reloads). Syntax from W3Schools on 06/24/18 <https://www.w3schools.com/jsref/event_onload.asp>
 document.addEventListener('load', resetAll());
