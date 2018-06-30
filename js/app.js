@@ -51,19 +51,26 @@ function addMove() {
     moveCount.innerHTML = moves;
 };
 
+// Clock functionality - need to add clock to the HTML and style it using the same font, etc., as the move count.
 function startTime() {
     let seconds = 0;
     let minutes = 0;
     setInterval(function() {
         seconds ++; 
-//        if(seconds < 10) {
-//            return `0${seconds}`;
-//            } else if(seconds > 59) {
-//                minutes++;
-//            } else if(minutes > 10) {
-//                return `0${minutes}`;
-//            } else return `${minutes}:${seconds}`;
-    console.log(seconds);
+        if(seconds < 10) {
+            seconds = `0${seconds}`;
+        };
+        if(seconds > 59) {
+            minutes++;
+        };
+        if(minutes = 0) {
+            minutes = `00`;
+        };
+        if(minutes > 0 && minutes < 10) {
+            minutes = `0${minutes}`;
+        };
+    let lapsedTime = `${minutes}:${seconds}`;
+    console.log(lapsedTime);// will need to change this to clock.innerHTML = lapsedTime;
     }, 1000);
 };
 
@@ -86,10 +93,30 @@ function resetMoves() {
 function resetAll() {
     resetCards();
     resetMoves();
-    //startTime();
+    startTime();
     //resetStars();
     //resetTimer();
-}
+};
+
+/*
+function returnStats() {
+    returnTime(final);
+    moveCount(final);
+    starCount(final);
+};
+
+function popUp() {
+    
+};
+
+function winGame() {
+    popUp();
+    returnStats();
+    //returnTime();
+    //stopTime();
+};
+*/
+
 // Event listener for page load that shuffles cards with each load (which includes reloads). Syntax from W3Schools on 06/24/18 <https://www.w3schools.com/jsref/event_onload.asp>
 document.addEventListener('load', resetAll());
 // Hoping I can call multiple functions in this event listener. Maybe an arrow function with each function on its own line? If not, I'll need to string all of the reset functions into one reset function with multiple [anonymous?] functions, and call that here with the page load and reset button.
