@@ -19,9 +19,10 @@ let moves = 0;
 const clock = document.querySelector('.clock');
 
 // resetButton
-let resetButton = document.querySelector('.restart');
+let resetButton = document.getElementById('reset-game');
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+// INTERACTING WITH THE CARDS AND DECK
+// Resources: Card shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -34,7 +35,7 @@ function shuffle(array) {
     }
 
     return array;
-}
+};
 
 function resetCards() {
     listOfCards = shuffle(listOfCards);
@@ -46,84 +47,6 @@ function resetCards() {
         listOfCards[i].classList.remove('match', 'open', 'show');
     };
 };
-
-function addMove() {
-    moves ++;
-    moveCount.innerHTML = moves;
-};
-
-function startTime() {
-    let seconds = 0;
-    let minutes = 0;
-    setInterval(function() {
-        seconds ++;
-        if(seconds < 10) {
-            seconds = `0${seconds}`;
-        }
-        if(seconds === 60) {
-            minutes++;
-            seconds = 0;
-        }
-    clock.innerHTML = `${minutes}:${seconds}`;
-    }, 1000)
-};
-
-// Stop timer
-function stopTime() {
-    clearInterval(startTime);
-};
-
-/*
-function resetStars() {
-
-};
-
-*/
-
-function resetMoves() {
-    let moves = 0;
-    moveCount.innerHTML = moves;
-};
-
-function resetGame() {
-    resetCards();
-    resetMoves();
-    startTime();
-    //resetStars();
-};
-
-/*
-function resetAll() {
-    stopTime();
-    resetGame();
-    console.log('not working');
-};
-
-function returnStats() {
-    returnTime(final);
-    moveCount(final);
-    starCount(final);
-};
-
-https://www.w3schools.com/howto/howto_css_modals.asp
-function popUp() {
-    
-};
-
-function winGame() {
-    popUp();
-    returnStats();
-    stopTime();
-};
-*/
-
-// Event listener for page load. Syntax from W3Schools on 06/24/18 <https://www.w3schools.com/jsref/event_onload.asp>
-document.addEventListener('load', resetGame());
-
-// Event listener for resetButton
-resetButton.addEventListener('click', resetAll());
-
-// Interacting with cards
 
 // Resources: https://www.w3schools.com/howto/howto_js_toggle_class.asp
 function flipCard(evtTarget) {
@@ -155,15 +78,95 @@ function checkForMatch() {
     }
 };
 
+// COUNTERS
+// Counting moves
+function addMove() {
+    moves ++;
+    moveCount.innerHTML = moves;
+};
+
+function resetMoves() {
+    let moves = 0;
+    moveCount.innerHTML = moves;
+};
+
+// Clock/Timer
+function startTime() {
+    let seconds = 0;
+    let minutes = 0;
+    setInterval(function() {
+        seconds ++;
+        if(seconds < 10) {
+            seconds = `0${seconds}`;
+        }
+        if(seconds === 60) {
+            minutes++;
+            seconds = 0;
+        }
+    clock.innerHTML = `${minutes}:${seconds}`;
+    }, 1000)
+};
+
+// Stop timer
+function stopTime() {
+    clearInterval(startTime);
+};
+
+/*
+function resetStars() {
+
+};
+
+*/
+
+// RESET THE GAME BOARD AND SCORES
+function resetAll() {
+    resetCards();
+    resetMoves();
+    startTime();
+    //resetStars();
+};
+
+/*
+// WIN GAME FUNCTIONS
+function returnStats() {
+    returnTime(final);
+    moveCount(final);
+    starCount(final);
+};
+
+// Resources: https://www.w3schools.com/howto/howto_css_modals.asp
+function popUp() {
+    //create popup
+    //returnStats();
+};
+
+*/
+
+function winGame() {
+    //forEach didn't work...
+    //if(cardsThatMatch.length === 16) {
+        //console.log('All Cards are Matched!');
+        //popUp();
+        //returnStats();
+        //return startTimer();
+        //stopTime();
+//    }
+};
+winGame();
+
+// EVENT LISTENERS
+// Resources: syntax from W3Schools on 06/24/18 <https://www.w3schools.com/jsref/event_onload.asp>
+document.addEventListener('load', resetAll());
+
+resetButton.addEventListener('click', resetAll());// FIX BUTTON
+
 deckOfCards.addEventListener('click', function(event) {
     let evtTarget = event.target;
     if(evtTarget.nodeName === 'LI') {
         flipCard(evtTarget);
         flippedCards.push(evtTarget);
-        console.log('Gotcha!');
-        console.log(flippedCards);
         if(flippedCards.length === 2) {
-            console.log('2 cards!');
             checkForMatch(flippedCards);
         }
     }
@@ -180,14 +183,10 @@ deckOfCards.addEventListener('click', function(event) {
 /*
  * set up the event listener for a card. If a card is clicked:
  * DONE - display the card's symbol (put this functionality in another function that you call from this one)
- * MOVE THE CLASS CHANGE TO ANOTHER FUNCTION - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+ * DONE - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
  * DONE - if the list already has another card, check to see if the two cards match
- * MOVE THE CLASS CHANGE TO ANOTHER FUNCTION     + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- * MOVE THE CLASS CHANGE TO ANOTHER FUNCTION     + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *      + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+ * DONE - if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+ * DONE - if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+ * DONE - increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *      + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-
-// Pop up message resources:
-// https://www.w3schools.com/js/js_popup.asp
-// https://www.w3schools.com/howto/howto_css_modals.asp
