@@ -16,6 +16,9 @@ let stars = document.querySelectorAll('.fa-star');
 const moveCount = document.querySelector('.moves');
 let moves = 0;
 
+// Clock
+const clock = document.querySelector('.clock');
+
 // resetButton
 let resetButton = document.getElementById('reset-game');
 
@@ -52,26 +55,21 @@ function addMove() {
 };
 
 // Clock functionality - need to add clock to the HTML and style it using the same font, etc., as the move count.
+// https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
 function startTime() {
-    let seconds = 0;
+    let seconds = 45;
     let minutes = 0;
     setInterval(function() {
-        seconds ++; 
+        seconds ++;
         if(seconds < 10) {
             seconds = `0${seconds}`;
-        };
-        if(seconds > 59) {
+        }
+        if(seconds === 60) {
             minutes++;
-        };
-        if(minutes = 0) {
-            minutes = `00`;
-        };
-        if(minutes > 0 && minutes < 10) {
-            minutes = `0${minutes}`;
-        };
-    let lapsedTime = `${minutes}:${seconds}`;
-    console.log(lapsedTime);// will need to change this to clock.innerHTML = lapsedTime;
-    }, 1000);
+            seconds = 0;
+        }
+    clock.innerHTML = `${minutes}:${seconds}`;
+    }, 1000)
 };
 
 // Stop timer
@@ -81,10 +79,6 @@ function stopTime() {
 
 /*
 function resetStars() {
-
-};
-
-function resetTimer() {
 
 };
 
@@ -100,7 +94,6 @@ function resetAll() {
     resetMoves();
     startTime();
     //resetStars();
-    //resetTimer();
 };
 
 /*
@@ -110,6 +103,7 @@ function returnStats() {
     starCount(final);
 };
 
+https://www.w3schools.com/howto/howto_css_modals.asp
 function popUp() {
     
 };
