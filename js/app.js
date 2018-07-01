@@ -6,8 +6,7 @@ const deckOfCards = document.querySelector('.deck');
 let card = document.querySelectorAll('.card');
 let cardsThatMatch = document.querySelectorAll('.match');
 let listOfCards = [...card];
-console.log(listOfCards);
-let flippedCards = []; // create array to hold the flipped cards, courtesy of Matt Cranford's blog, accessed 06/19/18 at <https://matthewcranford.com/memory-game-walkthrough-part-3-matching-pairs/>
+let flippedCards = []; // Idea to create an empty array to hold the flipped cards is courtesy of Matt Cranford's blog, accessed 06/19/18 at <https://matthewcranford.com/memory-game-walkthrough-part-3-matching-pairs/>
 
 // Stars
 let stars = document.querySelectorAll('.fa-star');
@@ -20,7 +19,7 @@ let moves = 0;
 const clock = document.querySelector('.clock');
 
 // resetButton
-let resetButton = document.getElementById('reset-game');
+let resetButton = document.querySelector('.restart');
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -41,12 +40,11 @@ function resetCards() {
     listOfCards = shuffle(listOfCards);
     for(let i = 0; i < listOfCards.length; i++) {
         deckOfCards.innerHTML = "";
-        // using array symbols to call the forEach method courtesy of sandraisreal accessed 06/24/18
         [].forEach.call(listOfCards, function(newCard) {
             deckOfCards.appendChild(newCard);
-        });
+        });// Using and empty array to call the forEach method is courtesy of sandraisreal accessed 06/24/18
         listOfCards[i].classList.remove('match', 'open', 'show');
-    }
+    };
 };
 
 function addMove() {
@@ -54,10 +52,8 @@ function addMove() {
     moveCount.innerHTML = moves;
 };
 
-// Clock functionality - need to add clock to the HTML and style it using the same font, etc., as the move count.
-// https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
 function startTime() {
-    let seconds = 45;
+    let seconds = 0;
     let minutes = 0;
     setInterval(function() {
         seconds ++;
@@ -89,7 +85,7 @@ function resetMoves() {
     moveCount.innerHTML = moves;
 };
 
-function resetAll() {
+function resetGame() {
     resetCards();
     resetMoves();
     startTime();
@@ -97,6 +93,12 @@ function resetAll() {
 };
 
 /*
+function resetAll() {
+    stopTime();
+    resetGame();
+    console.log('not working');
+};
+
 function returnStats() {
     returnTime(final);
     moveCount(final);
@@ -115,9 +117,8 @@ function winGame() {
 };
 */
 
-// Event listener for page load that shuffles cards with each load (which includes reloads). Syntax from W3Schools on 06/24/18 <https://www.w3schools.com/jsref/event_onload.asp>
-document.addEventListener('load', resetAll());
-// Hoping I can call multiple functions in this event listener. Maybe an arrow function with each function on its own line? If not, I'll need to string all of the reset functions into one reset function with multiple [anonymous?] functions, and call that here with the page load and reset button.
+// Event listener for page load. Syntax from W3Schools on 06/24/18 <https://www.w3schools.com/jsref/event_onload.asp>
+document.addEventListener('load', resetGame());
 
 // Event listener for resetButton
 resetButton.addEventListener('click', resetAll());
@@ -140,7 +141,6 @@ function checkForMatch() {
                 flippedCards[1].classList.toggle('match');
                 console.log('they match!');
                 addMove();
-                //increment move counter
                 flippedCards.splice(0, 2);
             } else {
                 flippedCards[0].classList.toggle('open');
@@ -149,10 +149,9 @@ function checkForMatch() {
                 flippedCards[1].classList.toggle('show');
                 console.log('no match!');
                 addMove();
-                //increment move counter
                 flippedCards.splice(0, 2);
             }
-        }, 3000);
+        }, 1500);
     }
 };
 
