@@ -19,7 +19,7 @@ let moves = 0;
 const clock = document.querySelector('.clock');
 
 // resetButton
-let resetButton = document.getElementById('reset-game');
+const resetButton = document.querySelector('.restart');
 
 // INTERACTING WITH THE CARDS AND DECK
 // Resources: Card shuffle function from http://stackoverflow.com/a/2450976
@@ -159,7 +159,13 @@ winGame();
 // Resources: syntax from W3Schools on 06/24/18 <https://www.w3schools.com/jsref/event_onload.asp>
 document.addEventListener('load', resetAll());
 
-resetButton.addEventListener('click', resetAll());// FIX BUTTON
+resetButton.addEventListener('click', function(event) {
+    resetCards();
+    resetMoves();
+    //stopTime(); stop & start time does not work why???
+    //startTime();
+    //resetStars();
+});// FIX BUTTON
 
 deckOfCards.addEventListener('click', function(event) {
     let evtTarget = event.target;
