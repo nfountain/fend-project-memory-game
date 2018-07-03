@@ -103,6 +103,10 @@ h1 {
     display: inline-block;
 }
 
+.score-panel .stars.hide {
+    visibility: hidden;
+}
+
 .score-panel .clock {
     display: inline-block;
     cursor: pointer;

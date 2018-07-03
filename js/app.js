@@ -7,9 +7,11 @@ let card = document.querySelectorAll('.card');
 let cardsThatMatch = document.querySelectorAll('.match');
 let listOfCards = [...card];
 let flippedCards = []; // Idea to create an empty array to hold the flipped cards is courtesy of Matt Cranford's blog, accessed 06/19/18 at <https://matthewcranford.com/memory-game-walkthrough-part-3-matching-pairs/>
+let matchedCards = [];
 
 // Stars
-let stars = document.querySelectorAll('.fa-star');
+let stars = document.querySelectorAll('.stars li');
+// ::before & ::after pseudoclasses <https://css-tricks.com/almanac/selectors/a/after-and-before/>
 
 // Moves (Counter)
 const moveCount = document.querySelector('.moves');
@@ -62,6 +64,8 @@ function checkForMatch() {
             if(flippedCards[0].firstElementChild.className === flippedCards[1].firstElementChild.className) {
                 flippedCards[0].classList.toggle('match');
                 flippedCards[1].classList.toggle('match');
+                matchedCards.push(flippedCards[0]);
+                matchedCards.push(flippedCards[1]);
                 console.log('they match!');
                 addMove();
                 flippedCards.splice(0, 2);
@@ -79,16 +83,57 @@ function checkForMatch() {
 };
 
 // COUNTERS
+
 // Counting moves
 function addMove() {
     moves ++;
     moveCount.innerHTML = moves;
 };
 
+function countMoves() {
+    if(moves > 9 && moves < 20) {
+        removeStars();
+    } else if(moves >= 20) {
+        removeStars();
+    }
+};
+
 function resetMoves() {
     let moves = 0;
     moveCount.innerHTML = moves;
 };
+
+// Stars
+
+// Alternative method - may be able to removeChild in the DOM, at least that was noted as a property when I was exploring the properties of the stars::before in the console.
+function removeStarChild() {
+    let stars = document.querySelector('.stars');
+    //let img = document.querySelectorAll('i');
+    stars.removeChild(stars.childNodes[0]);
+    stars.removeChild(stars.childNodes[1]);
+    //stars.remove.firstElementChild();
+};
+removeStarChild();
+//removeStarChild(); // It takes 2 runs of the removeStarChild() function to remove one visible star because it has to remove the li node and then the i node, which is two runs of this function/star.
+
+function whenToRemoveStar() {
+    if(matchedCards > 1 && matchedCards < 3) {
+        removeStarChild();
+        removeStarChild();
+    }
+    if(matchedCards >= 3) {
+        removeStarChild();
+        removeStarChild();
+    }
+};
+
+
+/*
+function resetStars() {
+
+};
+
+*/
 
 // Clock/Timer
 function startTime() {
@@ -112,12 +157,6 @@ function stopTime() {
     clearInterval(startTime);
 };
 
-/*
-function resetStars() {
-
-};
-
-*/
 
 // RESET THE GAME BOARD AND SCORES
 function resetAll() {
@@ -161,7 +200,7 @@ document.addEventListener('load', resetAll());
 
 resetButton.addEventListener('click', function(event) {
     resetCards();
-    resetMoves();
+    resetMoves();// Moves go to 0, but with next move, they just continue adding. Why?
     //stopTime(); stop & start time does not work why???
     //startTime();
     //resetStars();
