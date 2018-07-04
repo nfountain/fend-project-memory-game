@@ -10,7 +10,7 @@ let flippedCards = []; // Idea to create an empty array to hold the flipped card
 let matchedCards = [];
 
 // Stars
-const starList = document.querySelector('ul.stars');
+//const starList = document.querySelector('ul.stars'); -   MAY NOT NEED THIS QUERY SELECTOR ANYMORE, SINCE I'M NO LONGER USING THE REMOVECHILD METHOD.
 let stars = document.querySelectorAll('ul.stars li');
 
 // Moves (Counter)
@@ -21,7 +21,7 @@ let moves = 0;
 const clock = document.querySelector('.clock');
 let seconds = 0;
 let minutes = 0;
-var timer;
+let timer;
 
 // resetButton
 const resetButton = document.querySelector('.restart');
@@ -92,12 +92,21 @@ function addMove() {
     moves ++;
     moveCount.innerHTML = moves;
     if(moves === 10) {
-        starList.removeChild(stars[0]);
+        hideStar();
     } else if(moves === 20) {
-        starList.removeChild(stars[1]);
+        hideStar();
     }
 };
-// Used removeChild from the DOM, instead of style.visibility = hidden because that made the most sense to me. Using the 'ul' in the querySelector is courtesy of Ryan Waite's Memory Game Webinar from 06/05/18.
+
+// hideStar() for...of loop courtesy of Matt Cranford's blog accessed 07/03/18, at <https://matthewcranford.com/memory-game-walkthrough-part-5-moves-stars/>
+function hideStar() {
+    for(star of stars) {
+        if(star.style.visibility !== "hidden") {
+            (star.style.visibility = "hidden")
+            break;
+        }
+    }
+}
 
 function resetMoves() {
     moves = 0;
@@ -106,8 +115,11 @@ function resetMoves() {
 
 // Reset Stars
 function resetStars() {
-    const starList = document.querySelector('ul.stars');
-    let stars = document.querySelectorAll('ul.stars li');
+    for(star of stars) {
+        if(star.style.visibility !== "visible") {
+            (star.style.visibility = "visible")
+        }
+    }
 };
 
 // Clock/Timer
@@ -183,12 +195,12 @@ function winGame() {
 document.addEventListener('load', resetAll());
 
 resetButton.addEventListener('click', function() {
-    stopTime();// stop & start time does not work why???
+    stopTime();// stop time does not work why???
     startTime();
     resetCards();
-    resetMoves();// Moves go to 0, but with next move, they just continue adding. Why?
+    resetMoves();
     resetStars();
-});// FIX BUTTON
+});
 
 deckOfCards.addEventListener('click', function(event) {
     let evtTarget = event.target;
