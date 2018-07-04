@@ -10,7 +10,7 @@ let flippedCards = []; // Idea to create an empty array to hold the flipped card
 let matchedCards = [];
 
 // Stars
-let starList = document.querySelector('ul.stars');
+const starList = document.querySelector('ul.stars');
 let stars = document.querySelectorAll('ul.stars li');
 
 // Moves (Counter)
@@ -160,14 +160,13 @@ function popUp() {
 */
 
 function winGame() {
-    //forEach didn't work...
-    //if(cardsThatMatch.length === 16) {
-        //console.log('All Cards are Matched!');
+    if(matchedCards.length === 16) {
+        console.log('All Cards are Matched!');
         //popUp();
         //returnStats();
         //return startTimer();
         //stopTime();
-//    }
+    }
 };
 winGame();
 
