@@ -19,6 +19,9 @@ let moves = 0;
 
 // Clock
 const clock = document.querySelector('.clock');
+let seconds = 0;
+let minutes = 0;
+var timer;
 
 // resetButton
 const resetButton = document.querySelector('.restart');
@@ -94,53 +97,54 @@ function addMove() {
         starList.removeChild(stars[1]);
     }
 };
-// Used removeChild from the DOM, instead of style.visibility = hidden because that made the most sense to me. Using the 'ul' in the querySelector is courteosy of ________ Memory Game Webinar
+// Used removeChild from the DOM, instead of style.visibility = hidden because that made the most sense to me. Using the 'ul' in the querySelector is courtesy of Ryan Waite's Memory Game Webinar from 06/05/18.
 
 function resetMoves() {
-    let moves = 0;//TODO: MOVE THIS TO THE RESET FUNCTION AND SEE IF IT WORKS
+    moves = 0;
     moveCount.innerHTML = moves;
 };
 
-// Stars
-/*
+// Reset Stars
 function resetStars() {
-
+    const starList = document.querySelector('ul.stars');
+    let stars = document.querySelectorAll('ul.stars li');
 };
-
-*/
 
 // Clock/Timer
 function startTime() {
-    let seconds = 0;
-    let minutes = 0;
-    setInterval(function() {
+    timer = setInterval(function() {
         seconds ++;
-        if(seconds < 10) {
-            seconds = `0${seconds}`;
-        }
-        if(seconds === 60) {
-            minutes++;
-            seconds = 0;
-        }
-    clock.innerHTML = `${minutes}:${seconds}`;
+        displayTime();
     }, 1000)
+};
+
+function displayTime() {
+    if(seconds ===0) {
+        seconds = `00`;
+    }
+    if(seconds < 10) {
+        seconds = `0${seconds}`;
+    }
+    if(seconds === 60) {
+        minutes++;
+        seconds = 0;
+    }
+clock.innerHTML = `${minutes}:${seconds}`;
 };
 
 // Stop timer
 function stopTime() {
-    clearInterval(startTime);
-    seconds = 0;
-    minutes = 0;
+    clearInterval(timer);//It still doesn't work properly...
 };
 
 
 // RESET THE GAME BOARD AND SCORES
 function resetAll() {
-    stopTime();
+    //stopTime();
+    startTime();
     resetCards();
     resetMoves();
-    startTime();
-    //resetStars();
+    resetStars();
 };
 
 /*
@@ -159,16 +163,20 @@ function popUp() {
 
 */
 
-function winGame() {
+function allMatched() {
     if(matchedCards.length === 16) {
         console.log('All Cards are Matched!');
-        //popUp();
-        //returnStats();
-        //return startTimer();
-        //stopTime();
+        winGame();
     }
 };
-winGame();
+
+function winGame() {
+    console.log('Maybe this works!');
+    //popUp();
+    //returnStats();
+    //return startTimer();
+    //stopTime();
+};
 
 // EVENT LISTENERS
 // Resources: syntax from W3Schools on 06/24/18 <https://www.w3schools.com/jsref/event_onload.asp>
@@ -176,10 +184,10 @@ document.addEventListener('load', resetAll());
 
 resetButton.addEventListener('click', function() {
     stopTime();// stop & start time does not work why???
+    startTime();
     resetCards();
     resetMoves();// Moves go to 0, but with next move, they just continue adding. Why?
-    //startTime();
-    //resetStars();
+    resetStars();
 });// FIX BUTTON
 
 deckOfCards.addEventListener('click', function(event) {
@@ -191,6 +199,7 @@ deckOfCards.addEventListener('click', function(event) {
             checkForMatch(flippedCards);
         }
     }
+    allMatched();
 });
 
 
