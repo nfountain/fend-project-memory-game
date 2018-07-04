@@ -10,8 +10,8 @@ let flippedCards = []; // Idea to create an empty array to hold the flipped card
 let matchedCards = [];
 
 // Stars
-let stars = document.querySelectorAll('.stars li');
-// ::before & ::after pseudoclasses <https://css-tricks.com/almanac/selectors/a/after-and-before/>
+let starList = document.querySelector('ul.stars');
+let stars = document.querySelectorAll('ul.stars li');
 
 // Moves (Counter)
 const moveCount = document.querySelector('.moves');
@@ -84,50 +84,24 @@ function checkForMatch() {
 
 // COUNTERS
 
-// Counting moves
+// Counting moves and removing stars
 function addMove() {
     moves ++;
     moveCount.innerHTML = moves;
-};
-
-function countMoves() {
-    if(moves > 9 && moves < 20) {
-        removeStars();
-    } else if(moves >= 20) {
-        removeStars();
+    if(moves === 10) {
+        starList.removeChild(stars[0]);
+    } else if(moves === 20) {
+        starList.removeChild(stars[1]);
     }
 };
+// Used removeChild from the DOM, instead of style.visibility = hidden because that made the most sense to me. Using the 'ul' in the querySelector is courteosy of ________ Memory Game Webinar
 
 function resetMoves() {
-    let moves = 0;
+    let moves = 0;//TODO: MOVE THIS TO THE RESET FUNCTION AND SEE IF IT WORKS
     moveCount.innerHTML = moves;
 };
 
 // Stars
-
-// Alternative method - may be able to removeChild in the DOM, at least that was noted as a property when I was exploring the properties of the stars::before in the console.
-function removeStarChild() {
-    let stars = document.querySelector('.stars');
-    //let img = document.querySelectorAll('i');
-    stars.removeChild(stars.childNodes[0]);
-    stars.removeChild(stars.childNodes[1]);
-    //stars.remove.firstElementChild();
-};
-removeStarChild();
-//removeStarChild(); // It takes 2 runs of the removeStarChild() function to remove one visible star because it has to remove the li node and then the i node, which is two runs of this function/star.
-
-function whenToRemoveStar() {
-    if(matchedCards > 1 && matchedCards < 3) {
-        removeStarChild();
-        removeStarChild();
-    }
-    if(matchedCards >= 3) {
-        removeStarChild();
-        removeStarChild();
-    }
-};
-
-
 /*
 function resetStars() {
 
@@ -155,11 +129,14 @@ function startTime() {
 // Stop timer
 function stopTime() {
     clearInterval(startTime);
+    seconds = 0;
+    minutes = 0;
 };
 
 
 // RESET THE GAME BOARD AND SCORES
 function resetAll() {
+    stopTime();
     resetCards();
     resetMoves();
     startTime();
@@ -198,10 +175,10 @@ winGame();
 // Resources: syntax from W3Schools on 06/24/18 <https://www.w3schools.com/jsref/event_onload.asp>
 document.addEventListener('load', resetAll());
 
-resetButton.addEventListener('click', function(event) {
+resetButton.addEventListener('click', function() {
+    stopTime();// stop & start time does not work why???
     resetCards();
     resetMoves();// Moves go to 0, but with next move, they just continue adding. Why?
-    //stopTime(); stop & start time does not work why???
     //startTime();
     //resetStars();
 });// FIX BUTTON
