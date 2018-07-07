@@ -179,7 +179,6 @@ function popUp() {
     //create popup
     //returnStats();
 };
-
 */
 
 function allMatched() {
@@ -191,24 +190,16 @@ function allMatched() {
 
 function winGame() {
     console.log('Maybe this works!');
-    //popUp();
-    //returnStats();
-    //return startTimer();
+    //popUp(); can I have the popup function stopTime() and returnStats()???
     //stopTime();
+    //returnStats();
 };
 
 // EVENT LISTENERS
 // Resources: syntax from W3Schools on 06/24/18 <https://www.w3schools.com/jsref/event_onload.asp>
 document.addEventListener('load', resetAll());
 
-resetButton.addEventListener('click', function() {
-    stopTime();
-    clearTime();
-    startTime();
-    resetCards();
-    resetMoves();
-    resetStars();
-});
+resetButton.addEventListener('click', resetAll);
 
 deckOfCards.addEventListener('click', function(event) {
     let evtTarget = event.target;
