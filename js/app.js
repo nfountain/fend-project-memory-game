@@ -59,6 +59,7 @@ function checkForMatch() {
                 console.log('they match!');
                 addMove();
                 flippedCards.splice(0, 2);
+                allMatched();
             } else {
                 flippedCards[0].classList.toggle('open');
                 flippedCards[0].classList.toggle('show');
