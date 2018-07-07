@@ -17,12 +17,6 @@ let stars = document.querySelectorAll('ul.stars li');
 const moveCount = document.querySelector('.moves');
 let moves = 0;
 
-// Clock
-const clock = document.querySelector('.clock');
-let seconds = 0;
-let minutes = 0;
-let timer;
-
 // resetButton
 const resetButton = document.querySelector('.restart');
 
@@ -123,6 +117,11 @@ function resetStars() {
 };
 
 // Clock/Timer
+const clock = document.querySelector('.clock');
+let seconds = 0;
+let minutes = 0;
+let timer;
+
 function startTime() {
     timer = setInterval(function() {
         seconds ++;
@@ -146,13 +145,20 @@ clock.innerHTML = `${minutes}:${seconds}`;
 
 // Stop timer
 function stopTime() {
-    clearInterval(timer);//It still doesn't work properly...
+    clearInterval(timer);
 };
 
+// Restart/Clear value of timer & display
+function clearTime() {
+    seconds = 0;
+    minutes = 0;
+    clock.innerHTML = `${minutes}:0${seconds}`;
+  };
 
 // RESET THE GAME BOARD AND SCORES
 function resetAll() {
-    //stopTime();
+    stopTime();
+    clearTime();
     startTime();
     resetCards();
     resetMoves();
@@ -195,7 +201,8 @@ function winGame() {
 document.addEventListener('load', resetAll());
 
 resetButton.addEventListener('click', function() {
-    stopTime();// stop time does not work why???
+    stopTime();
+    clearTime();
     startTime();
     resetCards();
     resetMoves();
