@@ -80,7 +80,7 @@ let moves = 0;
 // Stars
 //const starList = document.querySelector('ul.stars'); -   MAY NOT NEED THIS QUERY SELECTOR ANYMORE, SINCE I'M NO LONGER USING THE REMOVECHILD METHOD.
 let stars = document.querySelectorAll('ul.stars li');
-starList = ['star1', 'star2', 'star3'];
+let starList = ['star1', 'star2', 'star3'];
 // Counting moves and removing stars
 function addMove() {
     moves ++;
@@ -115,6 +115,7 @@ function resetStars() {
             (star.style.visibility = "visible")
         }
     }
+    starList = ['star1', 'star2', 'star3'];
 };
 
 // Clock/Timer
