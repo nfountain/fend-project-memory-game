@@ -9,14 +9,6 @@ let listOfCards = [...card];
 let flippedCards = []; // Idea to create an empty array to hold the flipped cards is courtesy of Matt Cranford's blog, accessed 06/19/18 at <https://matthewcranford.com/memory-game-walkthrough-part-3-matching-pairs/>
 let matchedCards = [];
 
-// Stars
-//const starList = document.querySelector('ul.stars'); -   MAY NOT NEED THIS QUERY SELECTOR ANYMORE, SINCE I'M NO LONGER USING THE REMOVECHILD METHOD.
-let stars = document.querySelectorAll('ul.stars li');
-
-// Moves (Counter)
-const moveCount = document.querySelector('.moves');
-let moves = 0;
-
 // resetButton
 const resetButton = document.querySelector('.restart');
 
@@ -81,6 +73,14 @@ function checkForMatch() {
 
 // COUNTERS
 
+// Moves (Counter)
+const moveCount = document.querySelector('.moves');
+let moves = 0;
+
+// Stars
+//const starList = document.querySelector('ul.stars'); -   MAY NOT NEED THIS QUERY SELECTOR ANYMORE, SINCE I'M NO LONGER USING THE REMOVECHILD METHOD.
+let stars = document.querySelectorAll('ul.stars li');
+starList = ['star1', 'star2', 'star3'];
 // Counting moves and removing stars
 function addMove() {
     moves ++;
@@ -88,7 +88,7 @@ function addMove() {
     if(moves === 10) {
         hideStar();
     } else if(moves === 20) {
-        hideStar();
+        hideStar();        
     }
 };
 
@@ -97,6 +97,7 @@ function hideStar() {
     for(star of stars) {
         if(star.style.visibility !== "hidden") {
             (star.style.visibility = "hidden")
+            starList.pop();
             break;
         }
     }
@@ -165,14 +166,14 @@ function resetAll() {
     resetStars();
 };
 
-/*
 // WIN GAME FUNCTIONS
 function returnStats() {
-    returnTime(final);
-    moveCount(final);
-    starCount(final);
+    console.log(clock.innerHTML);
+    console.log(moves);
+    console.log(starList.length);
 };
 
+/*
 // Resources: https://www.w3schools.com/howto/howto_css_modals.asp
 function popUp() {
     //create popup
