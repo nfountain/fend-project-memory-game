@@ -56,7 +56,6 @@ function checkForMatch() {
                 flippedCards[1].classList.toggle('match');
                 matchedCards.push(flippedCards[0]);
                 matchedCards.push(flippedCards[1]);
-                console.log('they match!');
                 addMove();
                 flippedCards.splice(0, 2);
                 allMatched();
@@ -65,7 +64,6 @@ function checkForMatch() {
                 flippedCards[0].classList.toggle('show');
                 flippedCards[1].classList.toggle('open');
                 flippedCards[1].classList.toggle('show');
-                console.log('no match!');
                 addMove();
                 flippedCards.splice(0, 2);
             }
@@ -189,35 +187,24 @@ function clickOutside(event) {
 };
 
 // Fill modal text:
-/*
+let winTime = document.querySelector('.clock-win');
+let winMoves = document.querySelector('.moves-win');
+let winStars = document.querySelector('.stars-win');
+
 function returnStats() {
-    let winTime = document.querySelector('.clock-win');
-    let winMoves = document.querySelector('.moves-win');
-    let winStars = document.querySelector('.stars-win');
-    winTime.innerHTML('.clock');
-    console.log(moves);
-    console.log(starList.length);
+    winTime.innerHTML = clock.innerHTML;
+    winMoves.innerHTML = moves;
+    winStars.innerHTML = starList.length;
 };
-*/
 
 // WIN GAME FUNCTIONS
-function returnStats() {
-    console.log(clock.innerHTML);
-    console.log(moves);
-    console.log(starList.length);
-};
-
-// Resources: https://www.w3schools.com/howto/howto_css_modals.asp
-
 function allMatched() {
     if(matchedCards.length === 16) {
-        console.log('All Cards are Matched!');
         winGame();
     }
 };
 
 function winGame() {
-    console.log('Maybe this works!');
     stopTime();
     returnStats();
     openModal();
