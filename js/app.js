@@ -9,8 +9,9 @@ let listOfCards = [...card];
 let flippedCards = []; // Idea to create an empty array to hold the flipped cards is courtesy of Matt Cranford's blog, accessed 06/19/18 at <https://matthewcranford.com/memory-game-walkthrough-part-3-matching-pairs/>
 let matchedCards = [];
 
-// resetButton
+// Buttons (reset game, and restart game from the winGame modal)
 const resetButton = document.querySelector('.restart');
+const restartButton = document.querySelector('.new-game');
 
 // INTERACTING WITH THE CARDS AND DECK
 // Resources: Card shuffle function from http://stackoverflow.com/a/2450976
@@ -166,6 +167,38 @@ function resetAll() {
     resetStars();
 };
 
+// MODAL
+// Resource: Used code from a Traversy Media video titled "Create a Modal with HTML, CSS, and JavaScript" viewed on 07/07/18, at <https://www.youtube.com/watch?v=6ophW7Ask_0>
+
+const modal = document.querySelector('.win-modal');
+
+// open modal
+function openModal() {
+    modal.style.display = 'block';
+};
+// close modal
+function closeModal() {
+    modal.style.display = 'none';
+};
+
+function clickOutside(event) {
+    if(event.target === modal) {
+        modal.style.display = 'none';
+    }
+};
+
+// Fill modal text:
+/*
+function returnStats() {
+    let winTime = document.querySelector('.clock-win');
+    let winMoves = document.querySelector('.moves-win');
+    let winStars = document.querySelector('.stars-win');
+    winTime.innerHTML('.clock');
+    console.log(moves);
+    console.log(starList.length);
+};
+*/
+
 // WIN GAME FUNCTIONS
 function returnStats() {
     console.log(clock.innerHTML);
@@ -173,13 +206,7 @@ function returnStats() {
     console.log(starList.length);
 };
 
-/*
 // Resources: https://www.w3schools.com/howto/howto_css_modals.asp
-function popUp() {
-    //create popup
-    //returnStats();
-};
-*/
 
 function allMatched() {
     if(matchedCards.length === 16) {
@@ -190,9 +217,9 @@ function allMatched() {
 
 function winGame() {
     console.log('Maybe this works!');
-    //popUp(); can I have the popup function stopTime() and returnStats()???
-    //stopTime();
-    //returnStats();
+    stopTime();
+    returnStats();
+    openModal();
 };
 
 // EVENT LISTENERS
@@ -200,6 +227,13 @@ function winGame() {
 document.addEventListener('load', resetAll());
 
 resetButton.addEventListener('click', resetAll);
+
+restartButton.addEventListener('click', function(event) {
+    resetAll();
+    closeModal();
+});//will need to add functionality to close button, as well, here.
+
+window.addEventListener('click', clickOutside);
 
 deckOfCards.addEventListener('click', function(event) {
     let evtTarget = event.target;
@@ -210,7 +244,7 @@ deckOfCards.addEventListener('click', function(event) {
             checkForMatch(flippedCards);
         }
     }
-    allMatched();
+    //allMatched();
 });
 
 

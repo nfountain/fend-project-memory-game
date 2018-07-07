@@ -101,6 +101,7 @@ h1 {
 .score-panel .stars li {
     list-style: none;
     display: inline-block;
+    color: orange;
 }
 
 .score-panel .stars.hide {
@@ -109,10 +110,51 @@ h1 {
 
 .score-panel .clock {
     display: inline-block;
-    cursor: pointer;
+/*    cursor: pointer;*/
 }
 
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+/* Buttons */
+button {
+    border: 2px #000000;
+    border-radius: 2px;
+}
+button:hover {
+    cursor: pointer;
+    background-color: #02b3e4;
+}
+
+/* Modal styling: Majority of the styling is from a Traversy Media video titled "Create a Modal with HTML, CSS, and JavaScript" viewed on 07/07/18, at <https://www.youtube.com/watch?v=6ophW7Ask_0> */
+.win-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.win-modal .content {
+    background-color: rgb(173, 216, 130);
+    margin: 25% auto;
+    padding: 20px;
+    width: 30%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2)), 0 7px 20px 0 rgba(0, 0, 0, 0.15));
+}
+
+ul.win-stats {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+button.new-game {
+    padding: 0.5em 0.5em;
 }
