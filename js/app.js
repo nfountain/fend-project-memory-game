@@ -35,7 +35,7 @@ function resetCards() {
         deckOfCards.innerHTML = "";
         [].forEach.call(listOfCards, function(newCard) {
             deckOfCards.appendChild(newCard);
-        });// Using and empty array to call the forEach method is courtesy of sandraisreal accessed 06/24/18, at <https://github.com/sandraisrael/Memory-Game-fend>
+        });// Using an empty array to call the forEach method is courtesy of sandraisreal accessed 06/24/18, at <https://github.com/sandraisrael/Memory-Game-fend>
         listOfCards[i].classList.remove('match', 'open', 'show');
     };
 };
