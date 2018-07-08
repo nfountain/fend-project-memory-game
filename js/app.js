@@ -159,6 +159,7 @@ function clearTime() {
 
 // RESET THE GAME BOARD AND SCORES
 function resetAll() {
+    flippedCards = [];
     stopTime();
     clearTime();
     startTime();
@@ -230,6 +231,7 @@ deckOfCards.addEventListener('click', function(event) {
     if(evtTarget.nodeName === 'LI') {
         flipCard(evtTarget);
         flippedCards.push(evtTarget);
+        console.log(flippedCards);
         if(flippedCards.length === 2) {
             checkForMatch(flippedCards);
         }
