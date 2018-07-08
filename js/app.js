@@ -227,14 +227,23 @@ restartButton.addEventListener('click', function() {
 
 window.addEventListener('click', clickOutside);
 
+// the validClick function (to prevent counting clicks on the same card more than once and prevent counting clicks on cards that are already matched) is from Matt Cranford's blog, accessed 07/08/18, at <https://matthewcranford.com/memory-game-walkthrough-part-3-matching-pairs/>.
+function validClick(evtTarget) {
+    return(
+        evtTarget.classList.contains('card') && !evtTarget.classList.contains('match') && flippedCards.length <2 && !flippedCards.includes(evtTarget)
+    );
+}
+
 deckOfCards.addEventListener('click', function(event) {
     let evtTarget = event.target;
     if(evtTarget.nodeName === 'LI') {
-        flipCard(evtTarget);
-        flippedCards.push(evtTarget);
-        console.log(flippedCards);
-        if(flippedCards.length === 2) {
-            checkForMatch(flippedCards);
+        if(validClick(evtTarget)) {
+            flipCard(evtTarget);
+            flippedCards.push(evtTarget);
+            console.log(flippedCards);
+            if(flippedCards.length === 2) {
+                checkForMatch(flippedCards);
+            }
         }
     }
 });
