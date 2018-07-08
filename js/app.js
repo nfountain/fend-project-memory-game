@@ -123,6 +123,7 @@ const clock = document.querySelector('.clock');
 let seconds = 0;
 let minutes = 0;
 let timer;
+let timerOff = true;
 
 function startTime() {
     timer = setInterval(function() {
@@ -163,7 +164,7 @@ function resetAll() {
     matchedCards = [];
     stopTime();
     clearTime();
-    startTime();
+    //startTime();
     resetCards();
     resetMoves();
     resetStars();
@@ -238,6 +239,10 @@ deckOfCards.addEventListener('click', function(event) {
     let evtTarget = event.target;
     if(evtTarget.nodeName === 'LI') {
         if(validClick(evtTarget)) {
+            if(timerOff) {// function to turn the timer on with the first click is from Matt Cranford's blog, accessed 07/08/18, at <https://matthewcranford.com/memory-game-walkthrough-part-6-the-clock/>.
+                startTime();
+                timerOff = false;
+            }
             flipCard(evtTarget);
             flippedCards.push(evtTarget);
             console.log(flippedCards);
