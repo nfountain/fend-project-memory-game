@@ -14,7 +14,7 @@ const resetButton = document.querySelector('.restart');
 const restartButton = document.querySelector('.new-game');
 
 // INTERACTING WITH THE CARDS AND DECK
-// Resources: Card shuffle function from http://stackoverflow.com/a/2450976
+// Resources: Card shuffle function came pre-loaded by Udacity; originally from <http://stackoverflow.com/a/2450976>
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -35,7 +35,7 @@ function resetCards() {
         deckOfCards.innerHTML = "";
         [].forEach.call(listOfCards, function(newCard) {
             deckOfCards.appendChild(newCard);
-        });// Using and empty array to call the forEach method is courtesy of sandraisreal accessed 06/24/18
+        });// Using and empty array to call the forEach method is courtesy of sandraisreal accessed 06/24/18, at <https://github.com/sandraisrael/Memory-Game-fend>
         listOfCards[i].classList.remove('match', 'open', 'show');
     };
 };
@@ -46,8 +46,7 @@ function flipCard(evtTarget) {
     evtTarget.classList.toggle('show');
 };
 
-// Resources: firstElementChild.classList did not work, so used Matt Cranford's approach of firstElementChild.className
-// TODO: Fix bug that allows cards with the 'match' class to be added to the array.
+// Resources: firstElementChild.classList did not work, so used Matt Cranford's approach of firstElementChild.className to find matches. Accessed his write-up of the code on 06/24/18 at <https://matthewcranford.com/memory-game-walkthrough-part-3-matching-pairs/>
 function checkForMatch() {
     if(flippedCards.length === 2) {
         setTimeout(function() {
@@ -78,9 +77,9 @@ const moveCount = document.querySelector('.moves');
 let moves = 0;
 
 // Stars
-//const starList = document.querySelector('ul.stars'); -   MAY NOT NEED THIS QUERY SELECTOR ANYMORE, SINCE I'M NO LONGER USING THE REMOVECHILD METHOD.
 let stars = document.querySelectorAll('ul.stars li');
 let starList = ['star1', 'star2', 'star3'];
+
 // Counting moves and removing stars
 function addMove() {
     moves ++;
@@ -119,6 +118,7 @@ function resetStars() {
 };
 
 // Clock/Timer
+// Resources: Memory Game Webinar with Ryan Waite used to help write the timer. Accessed 06/30/18, at <https://www.youtube.com/watch?v=oECVwum-7Zc&list=PL-UQ6doHcWnLwHtzKo_kGkZo9AcKI9KhL&index=12&t=2854s>. 
 const clock = document.querySelector('.clock');
 let seconds = 0;
 let minutes = 0;
@@ -176,7 +176,8 @@ const modal = document.querySelector('.win-modal');
 function openModal() {
     modal.style.display = 'block';
 };
-// close modal
+
+// close modal functions
 function closeModal() {
     modal.style.display = 'none';
 };
@@ -187,7 +188,7 @@ function clickOutside(event) {
     }
 };
 
-// Fill modal text:
+// Insert win statistics in modal:
 let winTime = document.querySelector('.clock-win');
 let winMoves = document.querySelector('.moves-win');
 let winStars = document.querySelector('.stars-win');
@@ -212,15 +213,15 @@ function winGame() {
 };
 
 // EVENT LISTENERS
-// Resources: syntax from W3Schools on 06/24/18 <https://www.w3schools.com/jsref/event_onload.asp>
+// Resources: syntax for event listeners is from W3Schools on 06/24/18 <https://www.w3schools.com/jsref/event_onload.asp>
 document.addEventListener('load', resetAll());
 
 resetButton.addEventListener('click', resetAll);
 
-restartButton.addEventListener('click', function(event) {
+restartButton.addEventListener('click', function() {
     resetAll();
     closeModal();
-});//will need to add functionality to close button, as well, here.
+});
 
 window.addEventListener('click', clickOutside);
 
@@ -233,24 +234,4 @@ deckOfCards.addEventListener('click', function(event) {
             checkForMatch(flippedCards);
         }
     }
-    //allMatched();
 });
-
-
-/* DONE
- * Display the cards on the page 
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
-/*
- * set up the event listener for a card. If a card is clicked:
- * DONE - display the card's symbol (put this functionality in another function that you call from this one)
- * DONE - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- * DONE - if the list already has another card, check to see if the two cards match
- * DONE - if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- * DONE - if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- * DONE - increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *      + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
