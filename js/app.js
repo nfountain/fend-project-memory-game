@@ -160,6 +160,7 @@ function clearTime() {
 // RESET THE GAME BOARD AND SCORES
 function resetAll() {
     flippedCards = [];
+    matchedCards = [];
     stopTime();
     clearTime();
     startTime();
