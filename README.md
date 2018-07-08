@@ -35,7 +35,7 @@ The code for the modal that pops up when the game is won is courtesy of a Traver
 
 Other sources of code snippets include: Matt Cranford's blog posts for the Memory Game Walkthrough ([Part 3](https://matthewcranford.com/memory-game-walkthrough-part-3-matching-pairs/), [Part 5](https://matthewcranford.com/memory-game-walkthrough-part-5-moves-stars/)), the [Memory Game Webinar](https://www.youtube.com/watch?v=oECVwum-7Zc&list=PL-UQ6doHcWnLwHtzKo_kGkZo9AcKI9KhL&index=12&t=2854s) with Ryan Waite, and Sandra Israel-Ovirih's [Memory Game](https://github.com/sandraisrael/Memory-Game-fend) Repo.
 
-Syntax guidelines were found at [W3Schools](https://www.w3schools.com/), and, of course, [MDN](https://developer.mozilla.org/en-US/).
+Other resources used in this project, include [W3Schools](https://www.w3schools.com/), [MDN](https://developer.mozilla.org/en-US/), a curation of [Awesome README](https://github.com/matiassingers/awesome-readme)'s, and my Udacity Mentor Kelli.
 
 ## Contributing
 
